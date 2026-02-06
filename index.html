@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Cover Letter Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-wrapper">
+            <div class="header">
+                <h1>AI Cover Letter Generator</h1>
+                <p>Create a professional cover letter in seconds</p>
+            </div>
+
+            <form id="coverLetterForm" class="form">
+                <!-- Candidate Name -->
+                <div class="form-group">
+                    <label for="candidateName">Full Name *</label>
+                    <input 
+                        type="text" 
+                        id="candidateName" 
+                        name="candidateName" 
+                        placeholder="Enter your full name"
+                        required
+                    />
+                </div>
+
+                <!-- Job Role -->
+                <div class="form-group">
+                    <label for="jobRole">Job Role *</label>
+                    <input 
+                        type="text" 
+                        id="jobRole" 
+                        name="jobRole" 
+                        placeholder="e.g., Senior Software Engineer"
+                        required
+                    />
+                </div>
+
+                <!-- Company Names -->
+                <div class="form-group">
+                    <label>Company Name(s) *</label>
+                    <div id="companiesContainer">
+                        <div class="company-input-group">
+                            <input 
+                                type="text" 
+                                class="company-input" 
+                                placeholder="Enter company name"
+                                required
+                            />
+                            <button type="button" class="btn-remove" style="display: none;">Remove</button>
+                        </div>
+                    </div>
+                    <button type="button" id="addCompanyBtn" class="btn-secondary">+ Add Another Company</button>
+                </div>
+
+                <!-- Key Skills -->
+                <div class="form-group">
+                    <label for="keySkills">Key Skills *</label>
+                    <textarea 
+                        id="keySkills" 
+                        name="keySkills" 
+                        placeholder="Enter your key skills separated by commas&#10;e.g., Python, JavaScript, Machine Learning, Project Management"
+                        rows="4"
+                        required
+                    ></textarea>
+                    <small>Separate skills with commas</small>
+                </div>
+
+                <!-- API Key Selection -->
+                <div class="form-group">
+                    <label for="apiProvider">AI Provider *</label>
+                    <select id="apiProvider" name="apiProvider" required>
+                        <option value="">Select an AI provider</option>
+                        <option value="openai">OpenAI (GPT-4)</option>
+                        <option value="gemini">Google Gemini</option>
+                    </select>
+                </div>
+
+                <!-- API Key Input -->
+                <div class="form-group">
+                    <label for="apiKey">API Key *</label>
+                    <input 
+                        type="password" 
+                        id="apiKey" 
+                        name="apiKey" 
+                        placeholder="Enter your API key (kept private)"
+                        required
+                    />
+                    <small>Your API key is not stored and only used for this session</small>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary" id="submitBtn">
+                    Generate Cover Letter
+                </button>
+            </form>
+
+            <!-- Loading and Error States -->
+            <div id="loadingState" class="loading-state" style="display: none;">
+                <div class="spinner"></div>
+                <p>Generating your cover letter...</p>
+            </div>
+
+            <div id="errorState" class="error-state" style="display: none;">
+                <p id="errorMessage"></p>
+                <button type="button" class="btn-secondary" onclick="resetForm()">Try Again</button>
+            </div>
+        </div>
+
+        <!-- Cover Letter Output -->
+        <div id="outputSection" class="output-wrapper" style="display: none;">
+            <div class="output-header">
+                <h2>Your Cover Letter</h2>
+                <button type="button" class="btn-secondary" id="copyBtn">Copy to Clipboard</button>
+                <button type="button" class="btn-secondary" id="downloadBtn">Download PDF</button>
+                <button type="button" class="btn-secondary" id="generateAnotherBtn">Generate Another</button>
+            </div>
+            <div id="coverLetterOutput" class="cover-letter-content"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
